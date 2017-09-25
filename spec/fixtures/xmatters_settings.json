@@ -1,0 +1,8 @@
+{
+  "xmatters": {
+    "inbound_integration_url": "https://test.xmatters.com/my/path"
+  },
+  "custom_config": {
+    "inbound_integration_url": "https://custom.xmatters.com/my/path"
+  }
+}
