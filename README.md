@@ -74,7 +74,7 @@ The gem is available as open source under the terms of the [MIT License](http://
 During development, to execute tests and perform additional linting and validation run the following command:
 
 ```sh
-  rake
+  bundle exec rake
 ```
 
 When ready to release a new version, run the following commands:

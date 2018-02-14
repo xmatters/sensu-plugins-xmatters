@@ -4,5 +4,8 @@
   },
   "custom_config": {
     "inbound_integration_url": "https://custom.xmatters.com/my/path"
+  },
+  "custom_config_with_apiKey": {
+    "inbound_integration_url": "https://test.xmatters.com/my/path?apiKey=some-type-of-key"
   }
 }

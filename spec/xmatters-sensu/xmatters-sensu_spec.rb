@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'XMSensu' do
   before do
     @uri = 'https://www.google.com/my/path'
+    @uri_with_query = 'https://www.google.com/my/path?apiKey=some-type-of-key'
     @event = JSON.parse(fixture('sample_event.json').read)
 
     body = {
@@ -20,6 +21,16 @@ describe 'XMSensu' do
               'User-Agent' => 'Ruby'
             })
       .to_return(status: 200, body: '', headers: {})
+
+    stub_request(:post, @uri_with_query)
+      .with(body: body.to_json,
+            headers: {
+              'Accept' => '*/*',
+              'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+              'Content-Type' => 'text/json',
+              'User-Agent' => 'Ruby'
+            })
+      .to_return(status: 201, body: '', headers: {})
   end
 
   describe 'version' do
@@ -57,6 +68,13 @@ describe 'XMSensu' do
       props = { 'prop1' => 'val1', 'prop2' => 'val2' }
       response = xm_client.send_event(props)
       expect(response.code).to eq '200'
+    end
+
+    it 'the client should handle apiKeys' do
+      xm_client = XMSensu::XMClient.new(@uri_with_query)
+      props = { 'prop1' => 'val1', 'prop2' => 'val2' }
+      response = xm_client.send_event(props)
+      expect(response.code).to eq '201'
     end
   end
 end

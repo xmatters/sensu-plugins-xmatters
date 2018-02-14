@@ -30,11 +30,14 @@ module XMSensu
     # Sends the properties to the configured integration url in the correct json format
     #
     def send_event(properties)
-      http = Net::HTTP.new(@uri.hostname, @uri.port)
-      request = Net::HTTP::Post.new(@uri.path, @header)
-      request.body = { properties: properties }.to_json
-      http.use_ssl = true
-      http.request(request)
+      response = nil
+      options = { use_ssl: true }
+      Net::HTTP.start(@uri.host, @uri.port, options) do |http|
+        request = Net::HTTP::Post.new(@uri, @header)
+        request.body = { properties: properties }.to_json
+        response = http.request request # Net::HTTPResponse object
+      end
+      response
     end
 
     #

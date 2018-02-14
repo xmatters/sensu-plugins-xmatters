@@ -88,5 +88,23 @@ describe 'Handlers' do
       @handler.read_event(event)
       @handler.handle
     end
+
+    it 'should send the correct payload to the configured url with query details' do
+      remove_request_stub(@event_stub_success)
+      stub_request(:post, 'https://test.xmatters.com/my/path?apiKey=some-type-of-key')
+        .with(body: @body.to_json,
+              headers: {
+                'Accept' => '*/*',
+                'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+                'Content-Type' => 'text/json',
+                'User-Agent' => 'Ruby'
+              })
+        .to_return(status: 201, body: '', headers: {})
+
+      handler_with_key = XMattersHandler.new('-c custom_config_with_apiKey'.split)
+      event = fixture('sample_event.json')
+      handler_with_key.read_event(event)
+      handler_with_key.handle
+    end
   end
 end
