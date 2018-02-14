@@ -36,6 +36,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'webmock', '~> 2.3'
   s.add_development_dependency 'colorize', '~> 0.8'
   s.add_development_dependency 'yard', '~> 0.8'
-  s.add_development_dependency 'github-markup', '~> 1.3'
+  s.add_development_dependency 'github-markup', '~> 1.6'
   s.add_development_dependency 'redcarpet', '~> 3.2'
 end

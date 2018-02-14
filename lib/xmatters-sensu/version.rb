@@ -17,7 +17,7 @@ module XMSensu
     #
     # PATCH Version
     #
-    PATCH = 3
+    PATCH = 5
 
     #
     # Formatted Version String
