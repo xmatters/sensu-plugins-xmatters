@@ -36,11 +36,6 @@ module XMSensu
         request = Net::HTTP::Post.new(@uri, @header)
         request.body = { properties: properties }.to_json
         response = http.request request # Net::HTTPResponse object
-        if response.is_a? Net::HTTPSuccess
-          puts 'Sent request to xMatters succesfully.'
-        else
-          puts 'Failed to send request to xMatters.'
-        end
       end
       response
     end

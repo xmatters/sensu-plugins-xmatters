@@ -76,7 +76,13 @@ class XMattersHandler < Sensu::Handler
     begin
       case @event['action']
       when 'create'
-        xm_client.send_event(payload)
+        response = xm_client.send_event(payload)
+        if response.is_a? Net::HTTPSuccess
+          puts 'Sent request to xMatters successfully.'
+        else
+          puts 'Failed to send request to xMatters.'
+          puts response.inspect
+        end
       when 'resolve'
         puts 'xMatters Handler bypassing resolve'
       end
